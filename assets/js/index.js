@@ -11,14 +11,14 @@ const app = createApp({
 				{ minAge: 71, maxAge: 200, employer: 7.5, employee: 5 }
 			],
 			allocations: [
-				{ minAge: 1, maxAge: 35, oaAllocation: 0.6217, saAllocation: 0.1621, maAllocation: 0.2162 },
-				{ minAge: 36, maxAge: 45, oaAllocation: 0.5677, saAllocation: 0.1891, maAllocation: 0.2432 },
-				{ minAge: 46, maxAge: 50, oaAllocation: 0.5136, saAllocation: 0.2162, maAllocation: 0.2702 },
-				{ minAge: 51, maxAge: 55, oaAllocation: 0.4055, saAllocation: 0.3108, maAllocation: 0.2837 },
-				{ minAge: 56, maxAge: 60, oaAllocation: 0.3872, saAllocation: 0.2741, maAllocation: 0.3387 },
-				{ minAge: 61, maxAge: 65, oaAllocation: 0.1592, saAllocation: 0.3636, maAllocation: 0.4772 },
-				{ minAge: 66, maxAge: 70, oaAllocation: 0.0607, saAllocation: 0.303, maAllocation: 0.6363 },
-				{ minAge: 71, maxAge: 200, oaAllocation: 0.08, saAllocation: 0.08, maAllocation: 0.84 }
+				{ minAge: 1, maxAge: 35, oaAllocation: 62.17, saAllocation: 16.21, maAllocation: 21.62 },
+				{ minAge: 36, maxAge: 45, oaAllocation: 56.77, saAllocation: 18.91, maAllocation: 24.32 },
+				{ minAge: 46, maxAge: 50, oaAllocation: 51.36, saAllocation: 21.62, maAllocation: 27.02 },
+				{ minAge: 51, maxAge: 55, oaAllocation: 40.55, saAllocation: 31.08, maAllocation: 28.37 },
+				{ minAge: 56, maxAge: 60, oaAllocation: 38.72, saAllocation: 27.41, maAllocation: 33.87 },
+				{ minAge: 61, maxAge: 65, oaAllocation: 15.92, saAllocation: 36.36, maAllocation: 47.72 },
+				{ minAge: 66, maxAge: 70, oaAllocation: 6.07, saAllocation: 30.3, maAllocation: 63.63 },
+				{ minAge: 71, maxAge: 200, oaAllocation: 8, saAllocation: 8, maAllocation: 84 }
 			],
 			age: null,
 			monthlyIncome: null,
@@ -106,8 +106,8 @@ const app = createApp({
 				return;
 			}
 
-			let saAmt = allocation.saAllocation * self.totalContribution;
-			let maAmt = allocation.maAllocation * self.totalContribution;
+			let saAmt = (allocation.saAllocation / 100) * self.totalContribution;
+			let maAmt = (allocation.maAllocation / 100) * self.totalContribution;
 			let oaAmt = self.totalContribution - saAmt - maAmt;
 
 			self.allocationResults['OA Allocation'] = { 'value': self.toCurrency(oaAmt) };
