@@ -86,9 +86,9 @@ const app = createApp({
 
 			let takeHomePay = monthlyIncome - self.totalContribution;
 
-			self.basicResults['Employer contribution'] = { 'value': self.toCurrency(employerContribution) };
-			self.basicResults['Employee contribution'] = { 'value': self.toCurrency(employeeContribution) };
-			self.basicResults['Take home pay'] = { 'value': self.toCurrency(takeHomePay) };
+			self.basicResults['Employer Contribution'] = { 'value': self.toCurrency(employerContribution) };
+			self.basicResults['Employee Contribution'] = { 'value': self.toCurrency(employeeContribution) };
+			self.basicResults['Take Home'] = { 'value': self.toCurrency(takeHomePay) };
 		},
 		calculateAllocation () {
 			let self = this;
@@ -109,7 +109,6 @@ const app = createApp({
 			let saAmt = allocation.saAllocation * self.totalContribution;
 			let maAmt = allocation.maAllocation * self.totalContribution;
 			let oaAmt = self.totalContribution - saAmt - maAmt;
-
 
 			self.allocationResults['OA Allocation'] = { 'value': self.toCurrency(oaAmt) };
 			self.allocationResults['SA Allocation'] = { 'value': self.toCurrency(saAmt) };

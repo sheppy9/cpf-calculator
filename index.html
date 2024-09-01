@@ -72,12 +72,10 @@
 								<tbody>
 									<tr v-for="rate in contributionRates">
 										<td scope="row" :class="[rate == contributionRate ? 'bg-info': '']">
-											<input v-if="rate == contributionRate" type="number" class="form-control" v-model="rate.minAge" @keyup="inputUpdated();">
-											<label v-else>{{ rate.minAge }}</label>
+											<label>{{ rate.minAge }}</label>
 										</td>
 										<td scope="row" :class="[rate == contributionRate ? 'bg-info': '']">
-											<input v-if="rate == contributionRate" type="number" class="form-control" v-model="rate.maxAge" @keyup="inputUpdated();">
-											<label v-else>{{ rate.maxAge }}</label>
+											<label>{{ rate.maxAge }}</label>
 										</td>
 										<td scope="row" :class="[rate == contributionRate ? 'bg-info': '']">
 											<input v-if="rate == contributionRate" type="number" class="form-control" v-model="rate.employer" @keyup="inputUpdated();">
@@ -109,21 +107,19 @@
 									<tbody>
 										<tr v-for="allo in allocations">
 											<td scope="row" :class="[allo == allocation ? 'bg-info': '']">
-												<input v-if="allo == allocation" type="number" class="form-control" v-model="allo.minAge" @keyup="inputUpdated();">
-												<label v-else>{{ allo.minAge }}</label>
+												<label>{{ allo.minAge }}</label>
 											</td>
 											<td scope="row" :class="[allo == allocation ? 'bg-info': '']">
-												<input v-if="allo == allocation" type="number" class="form-control" v-model="allo.maxAge" @keyup="inputUpdated();">
-												<label v-else>{{ allo.maxAge }}</label>
+												<label>{{ allo.maxAge }}</label>
 											</td>
 											<td scope="row" :class="[allo == allocation ? 'bg-info': '']">
-												<input type="number" class="form-control" v-model="allo.oaAllocation" @keyup="inputUpdated();">
+												<input v-if="allo == allocation" type="number" class="form-control" v-model="allo.oaAllocation" @keyup="inputUpdated();">
 											</td>
 											<td scope="row" :class="[allo == allocation ? 'bg-info': '']">
-												<input type="number" class="form-control" v-model="allo.saAllocation" @keyup="inputUpdated();">
+												<input v-if="allo == allocation" type="number" class="form-control" v-model="allo.saAllocation" @keyup="inputUpdated();">
 											</td>
 											<td scope="row" :class="[allo == allocation ? 'bg-info': '']">
-												<input type="number" class="form-control" v-model="allo.maAllocation" @keyup="inputUpdated();">
+												<input v-if="allo == allocation" type="number" class="form-control" v-model="allo.maAllocation" @keyup="inputUpdated();">
 											</td>
 										</tr>
 									</tbody>
