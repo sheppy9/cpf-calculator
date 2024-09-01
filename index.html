@@ -14,28 +14,38 @@
 			<div class="row">
 				<div class="col-lg-6 col-md-6 mx-auto mb-3">
 					<div class="card mb-3">
-						<div class="card-header bg-warning">Your Information</div>
+						<div class="card-header">Your Information</div>
 						<div class="card-body">
 							<div class="row my-1">
 								<label class="form-label col-4 text-end align-middle">Age</label>
 								<div class="col-8">
-									<input type="number" class="form-control" v-model="age" min="0" step="1" @keyup="inputUpdated();">
+									<input type="number" class="form-control" v-model="age" @keyup="inputUpdated();">
 								</div>
 							</div>
 
 							<div class="row my-1">
 								<label class="form-label col-4 text-end align-middle">Monthly Income</label>
 								<div class="col-8">
-									<input type="number" class="form-control" v-model="monthlyIncome" min="0" @keyup="inputUpdated();">
+									<input type="number" class="form-control" v-model="monthlyIncome" @keyup="inputUpdated();">
 								</div>
 							</div>
 						</div>
 					</div>
 					<div class="card">
-						<div class="card-header bg-success">Result</div>
+						<div class="card-header">Result</div>
 						<div class="card-body">
 							<div class="row">
-								<div class="col-12 row" v-for="(value, label) in computedValues">
+								<div class="col-12 row" v-for="(value, label) in basicResults">
+									<label class="form-label col-4 text-end align-middle">{{ label }}:</label>
+									<div class="col-8">
+										<label>{{ value.value }}</label>
+									</div>
+								</div>
+							</div>
+
+							<hr>
+							<div class="row">
+								<div class="col-12 row" v-for="(value, label) in allocationResults">
 									<label class="form-label col-4 text-end align-middle">{{ label }}:</label>
 									<div class="col-8">
 										<label>{{ value.value }}</label>
@@ -47,8 +57,8 @@
 				</div>
 
 				<div class="col-lg-5 col-md-6 mx-auto mb-3">
-					<div class="card">
-						<div class="card-header bg-info">Contribution Rates</div>
+					<div class="card mb-3">
+						<div class="card-header">Contribution Rates</div>
 						<div class="card-body table-responsive">
 							<table class="table table-striped table-hover">
 								<thead>
@@ -60,22 +70,65 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr v-for="rate in contributionRates" class="active">
-										<td scope="row" :class="[rate == contributionRate ? 'bg-primary': '']">
-											<input type="number" class="form-control" v-model="rate.minAge" min="0" max="200" step="1">
+									<tr v-for="rate in contributionRates">
+										<td scope="row" :class="[rate == contributionRate ? 'bg-info': '']">
+											<input v-if="rate == contributionRate" type="number" class="form-control" v-model="rate.minAge" @keyup="inputUpdated();">
+											<label v-else>{{ rate.minAge }}</label>
 										</td>
-										<td scope="row" :class="[rate == contributionRate ? 'bg-primary': '']">
-											<input type="number" class="form-control" v-model="rate.maxAge" min="0" max="200" step="1">
+										<td scope="row" :class="[rate == contributionRate ? 'bg-info': '']">
+											<input v-if="rate == contributionRate" type="number" class="form-control" v-model="rate.maxAge" @keyup="inputUpdated();">
+											<label v-else>{{ rate.maxAge }}</label>
 										</td>
-										<td scope="row" :class="[rate == contributionRate ? 'bg-primary': '']">
-											<input type="number" class="form-control" v-model="rate.employer" min="0" max="200" step="1">
+										<td scope="row" :class="[rate == contributionRate ? 'bg-info': '']">
+											<input v-if="rate == contributionRate" type="number" class="form-control" v-model="rate.employer" @keyup="inputUpdated();">
+											<label v-else>{{ rate.employer }}%</label>
 										</td>
-										<td scope="row" :class="[rate == contributionRate ? 'bg-primary': '']">
-											<input type="number" class="form-control" v-model="rate.employee" min="0" max="200" step="1">
+										<td scope="row" :class="[rate == contributionRate ? 'bg-info': '']">
+											<input v-if="rate == contributionRate" type="number" class="form-control" v-model="rate.employee" @keyup="inputUpdated();">
+											<label v-else>{{ rate.employee }}%</label>
 										</td>
 									</tr>
 								</tbody>
 							</table>
+						</div>
+					</div>
+					<div class="card">
+						<div class="card-header">CPF Allocation</div>
+						<div class="card-body">
+							<div class="card-body table-responsive">
+								<table class="table table-striped table-hover">
+									<thead>
+										<tr>
+											<th scope="col">Min Age</th>
+											<th scope="col">Max Age</th>
+											<th scope="col">OA Allocation</th>
+											<th scope="col">SA Allocation</th>
+											<th scope="col">MA Allocation</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr v-for="allo in allocations">
+											<td scope="row" :class="[allo == allocation ? 'bg-info': '']">
+												<input v-if="allo == allocation" type="number" class="form-control" v-model="allo.minAge" @keyup="inputUpdated();">
+												<label v-else>{{ allo.minAge }}</label>
+											</td>
+											<td scope="row" :class="[allo == allocation ? 'bg-info': '']">
+												<input v-if="allo == allocation" type="number" class="form-control" v-model="allo.maxAge" @keyup="inputUpdated();">
+												<label v-else>{{ allo.maxAge }}</label>
+											</td>
+											<td scope="row" :class="[allo == allocation ? 'bg-info': '']">
+												<input type="number" class="form-control" v-model="allo.oaAllocation" @keyup="inputUpdated();">
+											</td>
+											<td scope="row" :class="[allo == allocation ? 'bg-info': '']">
+												<input type="number" class="form-control" v-model="allo.saAllocation" @keyup="inputUpdated();">
+											</td>
+											<td scope="row" :class="[allo == allocation ? 'bg-info': '']">
+												<input type="number" class="form-control" v-model="allo.maAllocation" @keyup="inputUpdated();">
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
 						</div>
 					</div>
 				</div>
