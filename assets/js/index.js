@@ -22,6 +22,7 @@ const app = createApp({
 			],
 			age: null,
 			monthlyIncome: null,
+			cacheLocally: false,
 			contributionRate: null,
 			allocation: null,
 			totalContribution: null,
@@ -31,6 +32,19 @@ const app = createApp({
 		};
 	},
 	methods: {
+		init () {
+			let self = this;
+			let data = localStorage.getItem('data') || '{}';
+			data = JSON.parse(data);
+
+			for (const [key, value] of Object.entries(data)) {
+				if (key.length == 0) {
+					continue;
+				}
+
+				self.$data[key] = value;
+			}
+		},
 		inputUpdated () {
 			let self = this;
 			if (self.age == null) {
@@ -63,8 +77,20 @@ const app = createApp({
 				}
 			}
 
+			self.saveToCache();
 			self.calculateContribution();
 			self.calculateAllocation();
+		},
+		saveToCache () {
+			let self = this;
+			let data = localStorage.getItem('data') || '{}';
+			data = JSON.parse(data);
+			$('input.cacheable').each((i, e) => {
+				let field = $(e).prop('id');
+				data[field] = self.$data[field];
+			});
+
+			localStorage.setItem('data', JSON.stringify(data));
 		},
 		calculateContribution () {
 			let self = this;
@@ -123,6 +149,7 @@ const app = createApp({
 		}
 	},
 	mounted () {
+		this.init();
 		this.inputUpdated();
 	}
 });
