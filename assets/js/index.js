@@ -20,12 +20,14 @@ const app = createApp({
 				{ minAge: 66, maxAge: 70, oaAllocation: 6.07, saAllocation: 30.3, maAllocation: 63.63 },
 				{ minAge: 71, maxAge: 200, oaAllocation: 8, saAllocation: 8, maAllocation: 84 }
 			],
+			yob: null,
 			age: null,
 			monthlyIncome: null,
 			cacheLocally: false,
 			contributionRate: null,
 			allocation: null,
 			totalContribution: null,
+			highlightColor: 'bg-info',
 
 			basicResults: {},
 			allocationResults: {},
@@ -47,7 +49,14 @@ const app = createApp({
 		},
 		inputUpdated () {
 			let self = this;
-			if (self.age == null) {
+
+			if (self.yob != null && self.yob > 1000) {
+				self.age = new Date().getFullYear() - self.yob;
+			} else {
+				self.age = null;
+			}
+
+			if (self.age == null || self.age.length == 0) {
 				return;
 			}
 
@@ -112,8 +121,8 @@ const app = createApp({
 
 			let takeHomePay = monthlyIncome - self.totalContribution;
 
-			self.basicResults['Employer Contribution'] = { 'value': self.toCurrency(employerContribution) };
-			self.basicResults['Employee Contribution'] = { 'value': self.toCurrency(employeeContribution) };
+			self.basicResults['Employer'] = { 'value': self.toCurrency(employerContribution) };
+			self.basicResults['Employee'] = { 'value': self.toCurrency(employeeContribution) };
 			self.basicResults['Take Home'] = { 'value': self.toCurrency(takeHomePay) };
 		},
 		calculateAllocation () {
@@ -136,10 +145,10 @@ const app = createApp({
 			let maAmt = (allocation.maAllocation / 100) * self.totalContribution;
 			let oaAmt = self.totalContribution - saAmt - maAmt;
 
-			self.allocationResults['OA Allocation'] = { 'value': self.toCurrency(oaAmt) };
-			self.allocationResults['SA Allocation'] = { 'value': self.toCurrency(saAmt) };
-			self.allocationResults['MA Allocation'] = { 'value': self.toCurrency(maAmt) };
-			self.allocationResults['Total Contribution'] = { 'value': self.toCurrency(self.totalContribution) };
+			self.allocationResults['OA'] = { 'value': self.toCurrency(oaAmt) };
+			self.allocationResults['SA'] = { 'value': self.toCurrency(saAmt) };
+			self.allocationResults['MA'] = { 'value': self.toCurrency(maAmt) };
+			self.allocationResults['Total'] = { 'value': self.toCurrency(self.totalContribution) };
 		},
 		toCurrency (value) {
 			if (value == null) {
