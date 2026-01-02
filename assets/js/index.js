@@ -5,8 +5,8 @@ const app = createApp({
 		return {
 			contributionRates: [
 				{ minAge: 1, maxAge: 55, employer: 17, employee: 20 },
-				{ minAge: 56, maxAge: 60, employer: 15.5, employee: 17 },
-				{ minAge: 61, maxAge: 65, employer: 12, employee: 11.5 },
+				{ minAge: 56, maxAge: 60, employer: 16, employee: 18 },
+				{ minAge: 61, maxAge: 65, employer: 12.5, employee: 12.5 },
 				{ minAge: 66, maxAge: 70, employer: 9, employee: 7.5 },
 				{ minAge: 71, maxAge: 200, employer: 7.5, employee: 5 }
 			],
@@ -15,8 +15,8 @@ const app = createApp({
 				{ minAge: 36, maxAge: 45, oaAllocation: 56.77, saAllocation: 18.91, maAllocation: 24.32 },
 				{ minAge: 46, maxAge: 50, oaAllocation: 51.36, saAllocation: 21.62, maAllocation: 27.02 },
 				{ minAge: 51, maxAge: 55, oaAllocation: 40.55, saAllocation: 31.08, maAllocation: 28.37 },
-				{ minAge: 56, maxAge: 60, oaAllocation: 38.72, saAllocation: 27.41, maAllocation: 33.87 },
-				{ minAge: 61, maxAge: 65, oaAllocation: 15.92, saAllocation: 36.36, maAllocation: 47.72 },
+				{ minAge: 56, maxAge: 60, oaAllocation: 35.3, saAllocation: 33.82, maAllocation: 30.88 },
+				{ minAge: 61, maxAge: 65, oaAllocation: 14, saAllocation: 44, maAllocation: 42 },
 				{ minAge: 66, maxAge: 70, oaAllocation: 6.07, saAllocation: 30.3, maAllocation: 63.63 },
 				{ minAge: 71, maxAge: 200, oaAllocation: 8, saAllocation: 8, maAllocation: 84 }
 			],
